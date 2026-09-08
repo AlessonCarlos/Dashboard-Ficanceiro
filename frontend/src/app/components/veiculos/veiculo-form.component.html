@@ -1,0 +1,50 @@
+<div class="pagina">
+  <div class="cabecalho">
+    <h2>{{ id ? 'Editar veiculo' : 'Novo veiculo' }}</h2>
+  </div>
+
+  <p *ngIf="erro" class="mensagem-erro">{{ erro }}</p>
+
+  <form class="formulario" [formGroup]="form" (ngSubmit)="salvar()">
+    <div class="campo">
+      <label for="modelo">Modelo</label>
+      <input id="modelo" type="text" formControlName="modelo" placeholder="Ex: BYD Dolphin Mini" />
+      <span class="campo-erro" *ngIf="form.get('modelo')?.touched && form.get('modelo')?.invalid">
+        Informe o modelo do veiculo.
+      </span>
+    </div>
+
+    <div class="campo">
+      <label for="placa">Placa</label>
+      <input id="placa" type="text" formControlName="placa" placeholder="Ex: ABC1D23" />
+      <span class="campo-erro" *ngIf="form.get('placa')?.touched && form.get('placa')?.invalid">
+        Informe a placa do veiculo.
+      </span>
+    </div>
+
+    <div class="campo">
+      <label for="ano">Ano</label>
+      <input id="ano" type="number" formControlName="ano" />
+    </div>
+
+    <div class="campo">
+      <label for="valorCompra">Valor de compra (R$)</label>
+      <input id="valorCompra" type="number" step="0.01" formControlName="valorCompra" />
+    </div>
+
+    <div class="campo">
+      <label for="kmAtual">Km atual</label>
+      <input id="kmAtual" type="number" step="0.1" formControlName="kmAtual" />
+    </div>
+
+    <div class="campo">
+      <label for="consumoMedio">Consumo medio (km/l ou km/kWh)</label>
+      <input id="consumoMedio" type="number" step="0.01" formControlName="consumoMedio" />
+    </div>
+
+    <div class="acoes-formulario">
+      <button type="submit" class="botao-primario" [disabled]="salvando">Salvar</button>
+      <a routerLink="/veiculos" class="botao-secundario">Cancelar</a>
+    </div>
+  </form>
+</div>

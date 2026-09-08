@@ -1,0 +1,37 @@
+<div class="pagina">
+  <div class="cabecalho">
+    <h2>Veiculos</h2>
+    <a routerLink="/veiculos/novo" class="botao-primario">+ Novo veiculo</a>
+  </div>
+
+  <p *ngIf="erro" class="mensagem-erro">{{ erro }}</p>
+  <p *ngIf="carregando">Carregando...</p>
+
+  <table *ngIf="!carregando && veiculos.length > 0" class="tabela">
+    <thead>
+      <tr>
+        <th>Modelo</th>
+        <th>Placa</th>
+        <th>Ano</th>
+        <th>Km atual</th>
+        <th>Consumo medio</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let veiculo of veiculos">
+        <td>{{ veiculo.modelo }}</td>
+        <td>{{ veiculo.placa }}</td>
+        <td>{{ veiculo.ano }}</td>
+        <td>{{ veiculo.kmAtual }} km</td>
+        <td>{{ veiculo.consumoMedio }}</td>
+        <td class="acoes">
+          <a [routerLink]="['/veiculos', veiculo.id, 'editar']">Editar</a>
+          <button type="button" (click)="excluir(veiculo)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!carregando && veiculos.length === 0">Nenhum veiculo cadastrado ainda.</p>
+</div>
