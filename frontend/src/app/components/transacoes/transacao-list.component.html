@@ -1,0 +1,41 @@
+<div class="pagina">
+  <div class="cabecalho">
+    <h2>Transacoes</h2>
+    <a routerLink="/transacoes/novo" class="botao-primario">+ Nova transacao</a>
+  </div>
+
+  <p *ngIf="erro" class="mensagem-erro">{{ erro }}</p>
+  <p *ngIf="carregando">Carregando...</p>
+
+  <table *ngIf="!carregando && transacoes.length > 0" class="tabela">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Descricao</th>
+        <th>Conta</th>
+        <th>Categoria</th>
+        <th>Tipo</th>
+        <th>Valor</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let transacao of transacoes">
+        <td>{{ transacao.data }}</td>
+        <td>{{ transacao.descricao }}</td>
+        <td>{{ transacao.conta.nome }}</td>
+        <td>{{ transacao.categoria.nome }}</td>
+        <td [class.tipo-ganho]="transacao.tipo === 'GANHO'" [class.tipo-custo]="transacao.tipo === 'CUSTO'">
+          {{ transacao.tipo === 'GANHO' ? 'Ganho' : 'Custo' }}
+        </td>
+        <td>{{ transacao.valor | currency:'BRL' }}</td>
+        <td class="acoes">
+          <a [routerLink]="['/transacoes', transacao.id, 'editar']">Editar</a>
+          <button type="button" (click)="excluir(transacao)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!carregando && transacoes.length === 0">Nenhuma transacao registrada ainda.</p>
+</div>
