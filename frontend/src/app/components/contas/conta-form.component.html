@@ -1,0 +1,30 @@
+<div class="pagina">
+  <div class="cabecalho">
+    <h2>{{ id ? 'Editar conta' : 'Nova conta' }}</h2>
+  </div>
+
+  <p *ngIf="erro" class="mensagem-erro">{{ erro }}</p>
+
+  <form class="formulario" [formGroup]="form" (ngSubmit)="salvar()">
+    <div class="campo">
+      <label for="nome">Nome</label>
+      <input id="nome" type="text" formControlName="nome" placeholder="Ex: Uber, 99, Pessoal" />
+      <span class="campo-erro" *ngIf="form.get('nome')?.touched && form.get('nome')?.invalid">
+        Informe o nome da conta.
+      </span>
+    </div>
+
+    <div class="campo">
+      <label for="tipo">Tipo</label>
+      <select id="tipo" formControlName="tipo">
+        <option value="TRABALHO">Trabalho</option>
+        <option value="PESSOAL">Pessoal</option>
+      </select>
+    </div>
+
+    <div class="acoes-formulario">
+      <button type="submit" class="botao-primario" [disabled]="salvando">Salvar</button>
+      <a routerLink="/contas" class="botao-secundario">Cancelar</a>
+    </div>
+  </form>
+</div>

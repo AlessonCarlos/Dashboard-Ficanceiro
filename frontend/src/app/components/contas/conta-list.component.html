@@ -1,0 +1,31 @@
+<div class="pagina">
+  <div class="cabecalho">
+    <h2>Contas</h2>
+    <a routerLink="/contas/novo" class="botao-primario">+ Nova conta</a>
+  </div>
+
+  <p *ngIf="erro" class="mensagem-erro">{{ erro }}</p>
+  <p *ngIf="carregando">Carregando...</p>
+
+  <table *ngIf="!carregando && contas.length > 0" class="tabela">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let conta of contas">
+        <td>{{ conta.nome }}</td>
+        <td>{{ conta.tipo === 'TRABALHO' ? 'Trabalho' : 'Pessoal' }}</td>
+        <td class="acoes">
+          <a [routerLink]="['/contas', conta.id, 'editar']">Editar</a>
+          <button type="button" (click)="excluir(conta)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!carregando && contas.length === 0">Nenhuma conta cadastrada ainda.</p>
+</div>
