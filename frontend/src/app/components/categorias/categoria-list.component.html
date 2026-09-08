@@ -1,0 +1,31 @@
+<div class="pagina">
+  <div class="cabecalho">
+    <h2>Categorias</h2>
+    <a routerLink="/categorias/novo" class="botao-primario">+ Nova categoria</a>
+  </div>
+
+  <p *ngIf="erro" class="mensagem-erro">{{ erro }}</p>
+  <p *ngIf="carregando">Carregando...</p>
+
+  <table *ngIf="!carregando && categorias.length > 0" class="tabela">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let categoria of categorias">
+        <td>{{ categoria.nome }}</td>
+        <td>{{ categoria.tipo === 'GANHO' ? 'Ganho' : 'Custo' }}</td>
+        <td class="acoes">
+          <a [routerLink]="['/categorias', categoria.id, 'editar']">Editar</a>
+          <button type="button" (click)="excluir(categoria)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!carregando && categorias.length === 0">Nenhuma categoria cadastrada ainda.</p>
+</div>
