@@ -1,0 +1,24 @@
+.navegacao {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 24px;
+  background: #1b1b2f;
+}
+
+.marca {
+  color: #fff;
+  font-weight: 700;
+  margin-right: 12px;
+}
+
+.navegacao a {
+  color: #c9c9d9;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.navegacao a.ativo {
+  color: #fff;
+  font-weight: 600;
+}
